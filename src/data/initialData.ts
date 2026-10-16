@@ -1,4 +1,5 @@
 import { Product, LookbookItem, OrderRequest, ContactMessage } from '../types';
+import { FASHION_IMAGES } from '../assets/images';
 
 export const INITIAL_PRODUCTS: Product[] = [
   {
@@ -25,8 +26,8 @@ export const INITIAL_PRODUCTS: Product[] = [
       'Store in provided breathable cotton garment bag'
     ],
     images: [
-      '/src/assets/images/product_habesha_contemporary_1792167760569.jpg',
-      '/src/assets/images/hero_viava_fashion_1792167759332.jpg'
+      FASHION_IMAGES.habesha,
+      FASHION_IMAGES.hero
     ],
     sizes: [
       { size: 'XS', stock: 2 },
@@ -67,8 +68,8 @@ export const INITIAL_PRODUCTS: Product[] = [
       'Steam press between wears to refresh structural drape'
     ],
     images: [
-      '/src/assets/images/product_streetwear_tailored_1792167760503.jpg',
-      '/src/assets/images/gallery_addis_lifestyle_1792167761891.jpg'
+      FASHION_IMAGES.tailored,
+      FASHION_IMAGES.lifestyle
     ],
     sizes: [
       { size: 'XS', stock: 1 },
@@ -108,8 +109,8 @@ export const INITIAL_PRODUCTS: Product[] = [
       'Delicate dry clean only. Do not machine wash or steam pleats directly'
     ],
     images: [
-      '/src/assets/images/product_evening_silk_1792167760833.jpg',
-      '/src/assets/images/hero_viava_fashion_1792167759332.jpg'
+      FASHION_IMAGES.evening,
+      FASHION_IMAGES.hero
     ],
     sizes: [
       { size: 'XS', stock: 1 },
@@ -150,8 +151,8 @@ export const INITIAL_PRODUCTS: Product[] = [
       'Hang on wide cedar coat hanger'
     ],
     images: [
-      '/src/assets/images/hero_viava_fashion_1792167759332.jpg',
-      '/src/assets/images/gallery_addis_lifestyle_1792167761891.jpg'
+      FASHION_IMAGES.hero,
+      FASHION_IMAGES.lifestyle
     ],
     sizes: [
       { size: 'XS', stock: 2 },
@@ -189,8 +190,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     ],
     fabricCare: ['Dry clean only. Brush gently with natural garment brush.'],
     images: [
-      '/src/assets/images/gallery_addis_lifestyle_1792167761891.jpg',
-      '/src/assets/images/product_streetwear_tailored_1792167760503.jpg'
+      FASHION_IMAGES.lifestyle,
+      FASHION_IMAGES.tailored
     ],
     sizes: [
       { size: 'XS', stock: 0 },
@@ -227,7 +228,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     ],
     fabricCare: ['Gentle cold wash or hand wash with mild eco-detergent', 'Line dry in shade'],
     images: [
-      '/src/assets/images/product_habesha_contemporary_1792167760569.jpg'
+      FASHION_IMAGES.habesha
     ],
     sizes: [
       { size: 'XS', stock: 3 },
@@ -264,7 +265,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     ],
     fabricCare: ['Wipe clean with soft microfiber cloth', 'Apply leather conditioning balm biannually'],
     images: [
-      '/src/assets/images/hero_viava_fashion_1792167759332.jpg'
+      FASHION_IMAGES.hero
     ],
     sizes: [
       { size: 'Custom', stock: 6 }
@@ -297,7 +298,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     ],
     fabricCare: ['Dry clean or delicate cold hand wash. Iron on low heat.'],
     images: [
-      '/src/assets/images/product_habesha_contemporary_1792167760569.jpg'
+      FASHION_IMAGES.habesha
     ],
     sizes: [
       { size: 'S', stock: 2 },
@@ -318,7 +319,7 @@ export const INITIAL_LOOKBOOK: LookbookItem[] = [
     id: 'look-1',
     title: 'Highland Modernity: The Bole Campaign',
     caption: 'Editorial study in architectural tailoring against the skyline of Bole, Addis Ababa.',
-    image: '/src/assets/images/hero_viava_fashion_1792167759332.jpg',
+    image: FASHION_IMAGES.hero,
     tag: 'Studio Editorial',
     aspectRatio: 'landscape',
     linkedProductId: 'prod-4'
@@ -327,7 +328,7 @@ export const INITIAL_LOOKBOOK: LookbookItem[] = [
     id: 'look-2',
     title: 'The Sacred Golden Weave',
     caption: 'Reinterpreting traditional royal Habesha couture for the modern global gala.',
-    image: '/src/assets/images/product_habesha_contemporary_1792167760569.jpg',
+    image: FASHION_IMAGES.habesha,
     tag: 'Atelier Craft',
     aspectRatio: 'portrait',
     linkedProductId: 'prod-1'
@@ -336,7 +337,7 @@ export const INITIAL_LOOKBOOK: LookbookItem[] = [
     id: 'look-3',
     title: 'Emerald Structure & Addis Daylight',
     caption: 'Sharp tailoring designed for power meetings and creative salons in Kazanchis.',
-    image: '/src/assets/images/product_streetwear_tailored_1792167760503.jpg',
+    image: FASHION_IMAGES.tailored,
     tag: 'Runway',
     aspectRatio: 'portrait',
     linkedProductId: 'prod-2'
@@ -345,7 +346,7 @@ export const INITIAL_LOOKBOOK: LookbookItem[] = [
     id: 'look-4',
     title: 'Fluidity in Burnt Copper',
     caption: 'The dramatic 360-degree pleated gala gown in motion during fashion week previews.',
-    image: '/src/assets/images/product_evening_silk_1792167760833.jpg',
+    image: FASHION_IMAGES.evening,
     tag: 'Runway',
     aspectRatio: 'portrait',
     linkedProductId: 'prod-3'
@@ -354,7 +355,7 @@ export const INITIAL_LOOKBOOK: LookbookItem[] = [
     id: 'look-5',
     title: 'Meskel Square & Metropolitan Rhythm',
     caption: 'Street style captured along the light rail transit corridor of central Addis Ababa.',
-    image: '/src/assets/images/gallery_addis_lifestyle_1792167761891.jpg',
+    image: FASHION_IMAGES.lifestyle,
     tag: 'Addis Streetwear',
     aspectRatio: 'landscape',
     linkedProductId: 'prod-5'
@@ -381,7 +382,7 @@ export const INITIAL_ORDERS: OrderRequest[] = [
         selectedSize: 'S',
         selectedColor: 'Heritage Ivory & Gold',
         quantity: 1,
-        image: '/src/assets/images/product_habesha_contemporary_1792167760569.jpg'
+        image: FASHION_IMAGES.habesha
       }
     ],
     subtotalBirr: 8900,
@@ -411,7 +412,7 @@ export const INITIAL_ORDERS: OrderRequest[] = [
         selectedSize: 'M',
         selectedColor: 'Deep Forest Emerald',
         quantity: 1,
-        image: '/src/assets/images/product_streetwear_tailored_1792167760503.jpg'
+        image: FASHION_IMAGES.tailored
       }
     ],
     subtotalBirr: 6850,
@@ -441,7 +442,7 @@ export const INITIAL_ORDERS: OrderRequest[] = [
         selectedSize: 'M',
         selectedColor: 'Highland Pine Green',
         quantity: 1,
-        image: '/src/assets/images/gallery_addis_lifestyle_1792167761891.jpg'
+        image: FASHION_IMAGES.lifestyle
       }
     ],
     subtotalBirr: 5400,

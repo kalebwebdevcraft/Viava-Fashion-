@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from 'react';
-import { Search, SlidersHorizontal, Eye, ShoppingBag, Check, AlertCircle } from 'lucide-react';
+import { Search, SlidersHorizontal, Eye, ShoppingBag, Check, AlertCircle, Send, Sparkles } from 'lucide-react';
 import { useFashion } from '../context/FashionContext';
 import { Product, ProductCategory } from '../types';
+import { FASHION_IMAGES } from '../assets/images';
 
 const CATEGORIES: Array<'All' | ProductCategory> = [
   'All',
@@ -218,9 +219,12 @@ export const ProductCatalog: React.FC = () => {
                 {/* Image Container with aspect ratio 4:3 */}
                 <div className="relative aspect-[4/3] bg-stone-100 overflow-hidden">
                   <img
-                    src={product.images[0]}
+                    src={product.images[0] || FASHION_IMAGES.hero}
                     alt={product.title}
                     referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src = FASHION_IMAGES.hero;
+                    }}
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   />
 

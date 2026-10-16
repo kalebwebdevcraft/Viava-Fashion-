@@ -3,7 +3,7 @@ import { ShoppingBag, SlidersHorizontal, Menu, X, ShieldCheck } from 'lucide-rea
 import { useFashion } from '../context/FashionContext';
 
 export const Navbar: React.FC = () => {
-  const { cartCount, setIsCartOpen, activeView, setActiveView, orders } = useFashion();
+  const { cartCount, setIsCartOpen, activeView, setActiveView, orders, setIsPitchModalOpen } = useFashion();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const pendingOrdersCount = orders.filter(o => o.status === 'New').length;
@@ -17,12 +17,19 @@ export const Navbar: React.FC = () => {
   return (
     <header className="sticky top-0 z-40 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-stone-200/80 transition-colors">
       {/* Top micro-announcement */}
-      <div className="bg-stone-900 text-stone-200 text-xs py-1.5 px-4 text-center tracking-wide font-sans flex items-center justify-center gap-3">
+      <div className="bg-stone-900 text-stone-200 text-xs py-1.5 px-4 text-center tracking-wide font-sans flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
         <span>Bole Medhanialem Flagship Atelier, Addis Ababa</span>
-        <span className="text-stone-500" aria-hidden="true">·</span>
+        <span className="text-stone-500 hidden sm:inline" aria-hidden="true">·</span>
         <span>Same-day Addis Delivery</span>
-        <span className="text-stone-500" aria-hidden="true">·</span>
+        <span className="text-stone-500 hidden sm:inline" aria-hidden="true">·</span>
         <span className="text-amber-300 font-medium">All Prices in Birr (ETB)</span>
+        <span className="text-stone-500 hidden sm:inline" aria-hidden="true">·</span>
+        <button
+          onClick={() => setIsPitchModalOpen(true)}
+          className="text-amber-300 hover:text-white underline underline-offset-2 font-semibold transition-colors flex items-center gap-1 cursor-pointer"
+        >
+          <span>✨ Owner Pitch: See Sales Growth & ROI</span>
+        </button>
       </div>
 
       {/* Main Top Bar Contract: Brand Zone | Nav Links | Primary Action */}

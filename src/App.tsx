@@ -6,6 +6,9 @@ import { ProductCatalog } from './components/ProductCatalog';
 import { ProductDetailModal } from './components/ProductDetailModal';
 import { OrderDrawer } from './components/OrderDrawer';
 import { OrderConfirmationModal } from './components/OrderConfirmationModal';
+import { OwnerPitchModal } from './components/OwnerPitchModal';
+import { SizeGuideModal } from './components/SizeGuideModal';
+import { MobileQuickBar } from './components/MobileQuickBar';
 import { LookbookSection } from './components/LookbookSection';
 import { BoutiqueSection } from './components/BoutiqueSection';
 import { ContactSection } from './components/ContactSection';
@@ -16,7 +19,7 @@ const AppContent: React.FC = () => {
   const { activeView } = useFashion();
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF8F5]">
+    <div className="min-h-screen flex flex-col bg-[#FAF8F5] pb-14 md:pb-0">
       {/* Top Navigation Bar */}
       <Navbar />
 
@@ -52,6 +55,11 @@ const AppContent: React.FC = () => {
       <ProductDetailModal />
       <OrderDrawer />
       <OrderConfirmationModal />
+      <OwnerPitchModal />
+      <SizeGuideModal />
+
+      {/* Mobile Sticky Action Bar */}
+      <MobileQuickBar />
 
       {/* Footer */}
       <Footer />

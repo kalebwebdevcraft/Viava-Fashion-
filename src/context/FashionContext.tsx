@@ -15,6 +15,17 @@ import {
   INITIAL_ORDERS,
   INITIAL_CONTACTS
 } from '../data/initialData';
+import { FASHION_IMAGES } from '../assets/images';
+
+export const sanitizeImageUrl = (url?: string): string => {
+  if (!url) return FASHION_IMAGES.hero;
+  if (url.includes('hero_viava_fashion')) return FASHION_IMAGES.hero;
+  if (url.includes('product_habesha_contemporary')) return FASHION_IMAGES.habesha;
+  if (url.includes('product_streetwear_tailored')) return FASHION_IMAGES.tailored;
+  if (url.includes('product_evening_silk')) return FASHION_IMAGES.evening;
+  if (url.includes('gallery_addis_lifestyle')) return FASHION_IMAGES.lifestyle;
+  return url;
+};
 
 interface FashionContextType {
   products: Product[];
@@ -35,6 +46,10 @@ interface FashionContextType {
   setAdminTab: (tab: 'inventory' | 'orders' | 'analytics' | 'inquiries' | 'notifications') => void;
   lastSubmittedOrder: OrderRequest | null;
   setLastSubmittedOrder: (order: OrderRequest | null) => void;
+  isPitchModalOpen: boolean;
+  setIsPitchModalOpen: (open: boolean) => void;
+  isSizeGuideOpen: boolean;
+  setIsSizeGuideOpen: (open: boolean) => void;
 
   // Cart operations
   addToCart: (item: CartItem) => void;
@@ -76,19 +91,30 @@ interface FashionContextType {
 const FashionContext = createContext<FashionContextType | undefined>(undefined);
 
 const STORAGE_KEYS = {
-  PRODUCTS: 'viava_products_v2',
-  ORDERS: 'viava_orders_v2',
-  CONTACTS: 'viava_contacts_v2',
-  NOTIFICATIONS: 'viava_notifications_v2',
-  CART: 'viava_cart_v2'
+  PRODUCTS: 'viava_products_v4',
+  ORDERS: 'viava_orders_v4',
+  CONTACTS: 'viava_contacts_v4',
+  NOTIFICATIONS: 'viava_notifications_v4',
+  CART: 'viava_cart_v4'
 };
 
+const sanitizeProduct = (p: Product): Product => ({
+  ...p,
+  images: (p.images && p.images.length > 0)
+    ? p.images.map(img => sanitizeImageUrl(img))
+    : [FASHION_IMAGES.hero]
+});
+
 export const FashionProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Initialize state from localStorage or initial datasets
+  // Initialize state from localStorage or initial datasets with image sanitization
   const [products, setProducts] = useState<Product[]>(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEYS.PRODUCTS);
-      return stored ? JSON.parse(stored) : INITIAL_PRODUCTS;
+      if (stored) {
+        const parsed: Product[] = JSON.parse(stored);
+        return parsed.map(sanitizeProduct);
+      }
+      return INITIAL_PRODUCTS;
     } catch {
       return INITIAL_PRODUCTS;
     }
@@ -99,7 +125,17 @@ export const FashionProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [orders, setOrders] = useState<OrderRequest[]>(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEYS.ORDERS);
-      return stored ? JSON.parse(stored) : INITIAL_ORDERS;
+      if (stored) {
+        const parsed: OrderRequest[] = JSON.parse(stored);
+        return parsed.map(o => ({
+          ...o,
+          items: o.items.map(item => ({
+            ...item,
+            image: sanitizeImageUrl(item.image)
+          }))
+        }));
+      }
+      return INITIAL_ORDERS;
     } catch {
       return INITIAL_ORDERS;
     }
@@ -118,7 +154,6 @@ export const FashionProvider: React.FC<{ children: React.ReactNode }> = ({ child
     try {
       const stored = localStorage.getItem(STORAGE_KEYS.NOTIFICATIONS);
       if (stored) return JSON.parse(stored);
-      // Pre-seed notification logs corresponding to initial orders
       return [
         {
           id: 'notif-1',
@@ -145,7 +180,14 @@ export const FashionProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [cart, setCart] = useState<CartItem[]>(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEYS.CART);
-      return stored ? JSON.parse(stored) : [];
+      if (stored) {
+        const parsed: CartItem[] = JSON.parse(stored);
+        return parsed.map(item => ({
+          ...item,
+          image: sanitizeImageUrl(item.image)
+        }));
+      }
+      return [];
     } catch {
       return [];
     }
@@ -156,6 +198,8 @@ export const FashionProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [activeView, setActiveView] = useState<'storefront' | 'lookbook' | 'boutique' | 'admin' | 'contact'>('storefront');
   const [adminTab, setAdminTab] = useState<'inventory' | 'orders' | 'analytics' | 'inquiries' | 'notifications'>('inventory');
   const [lastSubmittedOrder, setLastSubmittedOrder] = useState<OrderRequest | null>(null);
+  const [isPitchModalOpen, setIsPitchModalOpen] = useState(false);
+  const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
 
   // Sync to localStorage
   useEffect(() => {
@@ -450,6 +494,10 @@ export const FashionProvider: React.FC<{ children: React.ReactNode }> = ({ child
         setAdminTab,
         lastSubmittedOrder,
         setLastSubmittedOrder,
+        isPitchModalOpen,
+        setIsPitchModalOpen,
+        isSizeGuideOpen,
+        setIsSizeGuideOpen,
         addToCart,
         removeFromCart,
         updateCartQuantity,

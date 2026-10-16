@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { X, Check, ShoppingBag, ShieldCheck, Truck, Sparkles, AlertTriangle } from 'lucide-react';
+import { X, Check, ShoppingBag, ShieldCheck, Truck, Sparkles, AlertTriangle, Ruler, Send } from 'lucide-react';
 import { useFashion } from '../context/FashionContext';
 
 export const ProductDetailModal: React.FC = () => {
-  const { products, selectedProductId, setSelectedProductId, addToCart, setIsCartOpen } = useFashion();
+  const { products, selectedProductId, setSelectedProductId, addToCart, setIsCartOpen, setIsSizeGuideOpen } = useFashion();
 
   const product = products.find(p => p.id === selectedProductId);
 
@@ -186,9 +186,19 @@ export const ProductDetailModal: React.FC = () => {
                 {/* Size Selector with real-time stock indicators */}
                 <div>
                   <div className="flex items-center justify-between text-xs mb-2">
-                    <span className="font-semibold text-stone-900 uppercase tracking-wider">
-                      Select Size:
-                    </span>
+                    <div className="flex items-center gap-3">
+                      <span className="font-semibold text-stone-900 uppercase tracking-wider">
+                        Select Size:
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setIsSizeGuideOpen(true)}
+                        className="text-stone-500 hover:text-stone-900 underline flex items-center gap-1 text-[11px]"
+                      >
+                        <Ruler className="w-3 h-3 text-amber-700" />
+                        <span>Size & Fitting Guide</span>
+                      </button>
+                    </div>
                     <span className="text-stone-500 font-mono text-[11px]">
                       {currentSizeObj ? (
                         currentStock > 0 ? (
@@ -343,7 +353,7 @@ export const ProductDetailModal: React.FC = () => {
                 <button
                   onClick={() => handleAddToCart(false)}
                   disabled={isSelectedOutOfStock}
-                  className="w-full py-3 px-4 rounded-md font-semibold text-xs tracking-wider uppercase border border-stone-900 text-stone-900 hover:bg-stone-100 transition-colors flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-full py-3 px-4 rounded-md font-semibold text-xs tracking-wider uppercase border border-stone-900 text-stone-900 hover:bg-stone-100 transition-colors flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
                 >
                   <ShoppingBag className="w-4 h-4" />
                   <span>Add to Order Bag</span>
@@ -352,12 +362,25 @@ export const ProductDetailModal: React.FC = () => {
                 <button
                   onClick={() => handleAddToCart(true)}
                   disabled={isSelectedOutOfStock}
-                  className="w-full py-3 px-4 rounded-md font-semibold text-xs tracking-wider uppercase bg-stone-900 text-white hover:bg-stone-800 transition-all flex items-center justify-center gap-2 shadow-md active:scale-98 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-full py-3 px-4 rounded-md font-semibold text-xs tracking-wider uppercase bg-stone-900 text-white hover:bg-stone-800 transition-all flex items-center justify-center gap-2 shadow-md active:scale-98 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
                 >
                   <span>Express Order Request</span>
                   <span aria-hidden="true">&rarr;</span>
                 </button>
               </div>
+
+              {/* Direct Telegram Concierge Link for Addis Customers */}
+              <a
+                href={`https://t.me/viavafashion_addis?text=${encodeURIComponent(
+                  `Hello Viava Fashion Bole Boutique! I am inquiring about "${product.title}" (Size: ${selectedSize}, Price: ${product.priceBirr.toLocaleString()} Birr). Can I schedule a private fitting at your showroom?`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-2.5 px-3 bg-stone-100 hover:bg-stone-200 text-[#229ED9] hover:text-[#1b81b2] rounded-md text-xs font-semibold flex items-center justify-center gap-2 border border-stone-200 transition-colors"
+              >
+                <Send className="w-3.5 h-3.5 text-[#229ED9]" />
+                <span>Instant Inquire on Telegram (@viavafashion_addis)</span>
+              </a>
 
               <p className="text-[11px] text-stone-400 text-center">
                 Submitting an order request reserves your size in our Addis boutique without immediate prepayment.

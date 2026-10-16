@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { useFashion } from '../context/FashionContext';
 import { Product, ProductCategory, CollectionName, OrderStatus, OrderRequest, NotificationLog, ProductVariantSize } from '../types';
+import { FASHION_IMAGES } from '../assets/images';
 
 export const AdminCMS: React.FC = () => {
   const {
@@ -60,7 +61,7 @@ export const AdminCMS: React.FC = () => {
   const [formCollection, setFormCollection] = useState<CollectionName>('Heritage Modern');
   const [formDescription, setFormDescription] = useState('');
   const [formBadge, setFormBadge] = useState('');
-  const [formImageUrl, setFormImageUrl] = useState('/src/assets/images/product_habesha_contemporary_1792167760569.jpg');
+  const [formImageUrl, setFormImageUrl] = useState(FASHION_IMAGES.habesha);
   const [formSizes, setFormSizes] = useState<ProductVariantSize[]>([
     { size: 'XS', stock: 2 },
     { size: 'S', stock: 4 },
@@ -78,11 +79,11 @@ export const AdminCMS: React.FC = () => {
 
   // Preset images for easy uploading/posting
   const PRESET_IMAGES = [
-    { label: 'Contemporary Habesha Gown', url: '/src/assets/images/product_habesha_contemporary_1792167760569.jpg' },
-    { label: 'Tailored Power Suit', url: '/src/assets/images/product_streetwear_tailored_1792167760503.jpg' },
-    { label: 'Pleated Gala Silk Dress', url: '/src/assets/images/product_evening_silk_1792167760833.jpg' },
-    { label: 'Addis Urban Coat & Set', url: '/src/assets/images/gallery_addis_lifestyle_1792167761891.jpg' },
-    { label: 'Bole Architectural Trench', url: '/src/assets/images/hero_viava_fashion_1792167759332.jpg' }
+    { label: 'Contemporary Habesha Gown', url: FASHION_IMAGES.habesha },
+    { label: 'Tailored Power Suit', url: FASHION_IMAGES.tailored },
+    { label: 'Pleated Gala Silk Dress', url: FASHION_IMAGES.evening },
+    { label: 'Addis Urban Coat & Set', url: FASHION_IMAGES.lifestyle },
+    { label: 'Bole Architectural Trench', url: FASHION_IMAGES.hero }
   ];
 
   const openAddModal = () => {

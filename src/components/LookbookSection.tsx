@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Sparkles, Maximize2, ShoppingBag, X, ArrowRight } from 'lucide-react';
 import { useFashion } from '../context/FashionContext';
 import { LookbookItem } from '../types';
+import { FASHION_IMAGES } from '../assets/images';
 
 export const LookbookSection: React.FC = () => {
   const { lookbook, setSelectedProductId } = useFashion();
@@ -72,9 +73,12 @@ export const LookbookSection: React.FC = () => {
               >
                 <div className={`relative ${isWide ? 'aspect-[16/9]' : 'aspect-[4/3]'} overflow-hidden`}>
                   <img
-                    src={item.image}
+                    src={item.image || FASHION_IMAGES.lifestyle}
                     alt={item.title}
                     referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src = FASHION_IMAGES.lifestyle;
+                    }}
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
@@ -132,9 +136,12 @@ export const LookbookSection: React.FC = () => {
 
             <div className="aspect-[16/10] sm:aspect-[16/9] bg-black">
               <img
-                src={activeItem.image}
+                src={activeItem.image || FASHION_IMAGES.lifestyle}
                 alt={activeItem.title}
                 referrerPolicy="no-referrer"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src = FASHION_IMAGES.lifestyle;
+                }}
                 className="w-full h-full object-contain"
               />
             </div>

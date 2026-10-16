@@ -1,6 +1,7 @@
 import React from 'react';
 import { MapPin, Clock, Phone, Mail, Award, CheckCircle2, Calendar } from 'lucide-react';
 import { useFashion } from '../context/FashionContext';
+import { FASHION_IMAGES } from '../assets/images';
 
 export const BoutiqueSection: React.FC = () => {
   const { setActiveView } = useFashion();
@@ -85,7 +86,7 @@ export const BoutiqueSection: React.FC = () => {
           <div className="lg:col-span-5 space-y-4">
             <div className="relative rounded-lg overflow-hidden border border-stone-200 shadow-xl bg-stone-900">
               <img
-                src="/src/assets/images/gallery_addis_lifestyle_1792167761891.jpg"
+                src={FASHION_IMAGES.lifestyle}
                 alt="Viava Fashion Bole Showroom Addis Ababa"
                 referrerPolicy="no-referrer"
                 className="w-full h-80 object-cover opacity-90"

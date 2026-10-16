@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, Sparkles, MapPin, CheckCircle2 } from 'lucide-react';
 import { useFashion } from '../context/FashionContext';
+import { FASHION_IMAGES } from '../assets/images';
 
 export const Hero: React.FC = () => {
   const { setActiveView } = useFashion();
@@ -78,7 +79,7 @@ export const Hero: React.FC = () => {
           <div className="lg:col-span-6 relative">
             <div className="relative aspect-[16/10] sm:aspect-[4/3] rounded-lg overflow-hidden shadow-2xl border border-stone-800 bg-stone-950">
               <img
-                src="/src/assets/images/hero_viava_fashion_1792167759332.jpg"
+                src={FASHION_IMAGES.hero}
                 alt="Viava Fashion modern high-fashion collection in Addis Ababa"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover object-center transform hover:scale-102 transition-transform duration-700"
