@@ -1,0 +1,6 @@
+{
+  "name": "Viava Fashion | Addis Ababa",
+  "description": "Modern luxury clothing store and atelier in Addis Ababa, Ethiopia. Explore contemporary Habesha couture, tailored streetwear, and eveningwear with prices in Birr, order requests, and real-time boutique inventory.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
